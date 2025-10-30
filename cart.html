@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - VDS PRINKZZZ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-bold text-gray-900">VDS PRINKZZZ</a>
+                <ul class="hidden md:flex space-x-8 items-center">
+                    <li><a href="index.html" class="hover:text-gray-600 transition">Home</a></li>
+                    <li><a href="men.html" class="hover:text-gray-600 transition">Men</a></li>
+                    <li><a href="women.html" class="hover:text-gray-600 transition">Women</a></li>
+                    <li><a href="about.html" class="hover:text-gray-600 transition">About</a></li>
+                    <li>
+                        <a href="cart.html" class="relative">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                            <span id="cart-count" class="absolute -top-2 -right-2 bg-gray-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                        </a>
+                    </li>
+                </ul>
+                <button class="md:hidden" id="mobile-menu-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <ul class="px-4 py-4 space-y-4">
+                <li><a href="index.html" class="block hover:text-gray-600">Home</a></li>
+                <li><a href="men.html" class="block hover:text-gray-600">Men</a></li>
+                <li><a href="women.html" class="block hover:text-gray-600">Women</a></li>
+                <li><a href="about.html" class="block hover:text-gray-600">About</a></li>
+                <li><a href="cart.html" class="block hover:text-gray-600">Cart</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Cart Section -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl md:text-5xl font-bold mb-8 fade-in">Shopping Cart</h1>
+            
+            <div class="flex flex-col lg:flex-row gap-8">
+                <!-- Cart Items -->
+                <div class="lg:w-2/3 fade-in">
+                    <div id="cart-items" class="space-y-6">
+                        <!-- Cart items will be loaded dynamically -->
+                    </div>
+                    <div id="empty-cart" class="text-center py-12 hidden">
+                        <p class="text-gray-600 text-xl mb-4">Your cart is empty</p>
+                        <a href="index.html" class="bg-gray-900 text-white px-8 py-3 hover:bg-gray-800 transition inline-block">Continue Shopping</a>
+                    </div>
+                </div>
+
+                <!-- Checkout Summary -->
+                <div class="lg:w-1/3 fade-in">
+                    <div class="bg-gray-50 p-6 sticky top-20">
+                        <h2 class="text-2xl font-bold mb-6">Order Summary</h2>
+                        
+                        <!-- Promo Code -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-semibold mb-2">Promo Code</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="promo-code" placeholder="Enter code" class="flex-1 px-4 py-2 border border-gray-300 focus:outline-none focus:border-gray-900">
+                                <button onclick="applyPromoCode()" class="bg-gray-900 text-white px-4 py-2 hover:bg-gray-800 transition">Apply</button>
+                            </div>
+                            <p id="promo-message" class="text-sm mt-2 text-green-600 hidden"></p>
+                        </div>
+
+                        <div class="border-t border-gray-300 pt-4 space-y-4 mb-6">
+                            <div class="flex justify-between">
+                                <span>Subtotal</span>
+                                <span id="subtotal">₹0.00</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Shipping</span>
+                                <span>Free</span>
+                            </div>
+                            <div class="flex justify-between text-sm text-gray-600">
+                                <span id="discount-label" class="hidden">Discount</span>
+                                <span id="discount" class="hidden text-green-600">-₹0.00</span>
+                            </div>
+                            <div class="flex justify-between text-lg font-bold border-t border-gray-300 pt-4">
+                                <span>Total</span>
+                                <span id="total">₹0.00</span>
+                            </div>
+                        </div>
+
+                        <a href="checkout.html" class="block w-full bg-gray-900 text-white py-3 hover:bg-gray-800 transition mb-4 text-center">
+                            Proceed to Checkout
+                        </a>
+                        <a href="index.html" class="block text-center text-gray-600 hover:text-gray-900 transition">
+                            Continue Shopping
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">VDS PRINKZZZ</h3>
+                    <p class="text-gray-400">Timeless fashion for the modern individual</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Shop</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="men.html" class="hover:text-white transition">Men's Collection</a></li>
+                        <li><a href="women.html" class="hover:text-white transition">Women's Collection</a></li>
+                        <li><a href="#" class="hover:text-white transition">Sale</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Customer Care</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="about.html" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="about.html" class="hover:text-white transition">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition">Shipping</a></li>
+                        <li><a href="#" class="hover:text-white transition">Returns</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">Instagram</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">Facebook</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 VDS PRINKZZZ. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Load cart items
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItems = document.getElementById('cart-items');
+            const emptyCart = document.getElementById('empty-cart');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '';
+                cartItems.classList.add('hidden');
+                emptyCart.classList.remove('hidden');
+                updateTotal();
+                return;
+            }
+
+            cartItems.classList.remove('hidden');
+            emptyCart.classList.add('hidden');
+
+            const formatINR = (n) => `₹${n.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            cartItems.innerHTML = cart.map((item, index) => `
+                <div class="flex gap-4 border-b pb-6">
+                    <img src="${item.image}" alt="${item.name}" class="w-24 h-24 object-cover">
+                    <div class="flex-1">
+                        <h3 class="font-semibold mb-2">${item.name}</h3>
+                        <p class="text-lg font-bold mb-2">${formatINR(parseFloat(String(item.price).replace(/[^0-9.]/g, '')) || 0)}</p>
+                        <div class="flex items-center gap-4">
+                            <label class="text-sm">Quantity:</label>
+                            <input type="number" value="${item.quantity}" min="1" 
+                                   onchange="updateQuantity(${index}, this.value)" 
+                                   class="w-16 px-2 py-1 border border-gray-300">
+                        </div>
+                    </div>
+                    <button onclick="removeFromCart(${index})" class="text-red-600 hover:text-red-800">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            `).join('');
+
+            updateCartCount();
+            updateTotal();
+        }
+
+        // Update quantity
+        function updateQuantity(index, quantity) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart[index].quantity = parseInt(quantity);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        // Remove from cart
+        function removeFromCart(index) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        // Update total
+        function updateTotal() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let subtotal = 0;
+
+            cart.forEach(item => {
+                const price = parseFloat(String(item.price).replace(/[^0-9.]/g, '')) || 0;
+                subtotal += price * item.quantity;
+            });
+
+            // Apply discount if present
+            const discount = parseFloat(localStorage.getItem('discount')) || 0;
+            const total = subtotal * (1 - discount);
+
+            const formatINR = (n) => `₹${n.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+            document.getElementById('subtotal').textContent = formatINR(subtotal);
+            
+            if (discount > 0) {
+                document.getElementById('discount-label').classList.remove('hidden');
+                document.getElementById('discount').classList.remove('hidden');
+                document.getElementById('discount').textContent = `-${formatINR(subtotal * discount)}`;
+            } else {
+                document.getElementById('discount-label').classList.add('hidden');
+                document.getElementById('discount').classList.add('hidden');
+            }
+            
+            document.getElementById('total').textContent = formatINR(total);
+        }
+
+        // Apply promo code
+        function applyPromoCode() {
+            const code = document.getElementById('promo-code').value.toUpperCase();
+            const promoMessage = document.getElementById('promo-message');
+            
+            if (code === 'VDS10') {
+                localStorage.setItem('discount', '0.1');
+                promoMessage.textContent = '10% discount applied!';
+                promoMessage.classList.remove('hidden');
+                updateTotal();
+            } else if (code === 'VDS20') {
+                localStorage.setItem('discount', '0.2');
+                promoMessage.textContent = '20% discount applied!';
+                promoMessage.classList.remove('hidden');
+                updateTotal();
+            } else {
+                promoMessage.textContent = 'Invalid promo code';
+                promoMessage.classList.add('text-red-600');
+                promoMessage.classList.remove('text-green-600');
+                promoMessage.classList.remove('hidden');
+            }
+        }
+
+
+        // Update cart count
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+
+        loadCart();
+    </script>
+</body>
+</html>
+

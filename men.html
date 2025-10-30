@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Men's Collection - VDS PRINKZZZ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+        .product-card img:hover {
+            transform: scale(1.05);
+        }
+        .filter-active {
+            background-color: #111827;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-bold text-gray-900">VDS PRINKZZZ</a>
+                <ul class="hidden md:flex space-x-8 items-center">
+                    <li><a href="index.html" class="hover:text-gray-600 transition">Home</a></li>
+                    <li><a href="men.html" class="hover:text-gray-600 transition font-semibold">Men</a></li>
+                    <li><a href="women.html" class="hover:text-gray-600 transition">Women</a></li>
+                    <li><a href="about.html" class="hover:text-gray-600 transition">About</a></li>
+                    <li>
+                        <a href="cart.html" class="relative">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                            <span id="cart-count" class="absolute -top-2 -right-2 bg-gray-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                        </a>
+                    </li>
+                </ul>
+                <button class="md:hidden" id="mobile-menu-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <ul class="px-4 py-4 space-y-4">
+                <li><a href="index.html" class="block hover:text-gray-600">Home</a></li>
+                <li><a href="men.html" class="block hover:text-gray-600">Men</a></li>
+                <li><a href="women.html" class="block hover:text-gray-600">Women</a></li>
+                <li><a href="about.html" class="block hover:text-gray-600">About</a></li>
+                <li><a href="cart.html" class="block hover:text-gray-600">Cart</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl md:text-5xl font-bold fade-in">Men's Collection</h1>
+            <p class="text-gray-600 mt-2 fade-in">Discover premium menswear for every occasion</p>
+        </div>
+    </section>
+
+    <!-- Filter Bar -->
+    <section class="py-6 bg-white border-b sticky top-16 z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap gap-4">
+                <button class="filter-btn px-4 py-2 border border-gray-300 hover:border-gray-900 transition filter-active" data-filter="all">All</button>
+                <button class="filter-btn px-4 py-2 border border-gray-300 hover:border-gray-900 transition" data-filter="tops">Tops</button>
+                <button class="filter-btn px-4 py-2 border border-gray-300 hover:border-gray-900 transition" data-filter="bottoms">Bottoms</button>
+                <button class="filter-btn px-4 py-2 border border-gray-300 hover:border-gray-900 transition" data-filter="footwear">Footwear</button>
+                <button class="filter-btn px-4 py-2 border border-gray-300 hover:border-gray-900 transition" data-filter="accessories">Accessories</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-8" id="products-grid">
+                <!-- Products will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">VDS PRINKZZZ</h3>
+                    <p class="text-gray-400">Timeless fashion for the modern individual</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Shop</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="men.html" class="hover:text-white transition">Men's Collection</a></li>
+                        <li><a href="women.html" class="hover:text-white transition">Women's Collection</a></li>
+                        <li><a href="#" class="hover:text-white transition">Sale</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Customer Care</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="about.html" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="about.html" class="hover:text-white transition">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition">Shipping</a></li>
+                        <li><a href="#" class="hover:text-white transition">Returns</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">Instagram</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">Facebook</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 VDS PRINKZZZ. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Products data
+        const products = [
+            { id: 1, name: 'Classic White Shirt', price: '₹89', image: 'https://images.unsplash.com/photo-1603252109303-2751441dd157?w=600', category: 'tops' },
+            { id: 2, name: 'Slim Fit Jeans', price: '₹95', image: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=600', category: 'bottoms' },
+            { id: 3, name: 'Leather Sneakers', price: '₹149', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600', category: 'footwear' },
+            { id: 4, name: 'Denim Jacket', price: '$120', image: '../../../Downloads/xl-no-910-denim-sblj-19-linaria-original-imah7kzr7g4ptgjw.webp', category: 'tops' },
+            { id: 5, name: 'Chino Pants', price: '₹75', image: 'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=600', category: 'bottoms' },
+            { id: 6, name: 'Watch Classic', price: '₹199', image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600', category: 'accessories' },
+            { id: 7, name: 'Knit Sweater', price: '₹110', image: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600', category: 'tops' },
+            { id: 8, name: 'Leather Belt', price: '₹55', image: 'https://images.unsplash.com/photo-1576871337622-98d48d1cf531?w=600', category: 'accessories' },
+            { id: 9, name: 'Oxford Shoes', price: '₹175', image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600', category: 'footwear' },
+            { id: 10, name: 'Hooded Sweatshirt', price: '₹85', image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600', category: 'tops' },
+            { id: 11, name: 'Cargo Shorts', price: '₹65', image: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600', category: 'bottoms' },
+            { id: 12, name: 'Sport Sneakers', price: '₹125', image: 'https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=600', category: 'footwear' }
+        ];
+
+        // Helpers
+        function parsePrice(value) {
+            return parseFloat(String(value).replace(/[^0-9.]/g, '')) || 0;
+        }
+        function formatINR(n) {
+            return `₹${n.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        }
+
+        // Render products
+        function renderProducts(filter = 'all') {
+            const grid = document.getElementById('products-grid');
+            const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+            
+            grid.innerHTML = filtered.map(product => `
+                <div class="product-card fade-in">
+                    <div class="relative overflow-hidden rounded-lg mb-4">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-80 object-cover transition">
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2">${product.name}</h3>
+                    <p class="text-xl font-bold mb-4">${formatINR(parsePrice(product.price))}</p>
+                    <button onclick="addToCart(${product.id}, '${product.name}', '${formatINR(parsePrice(product.price))}', '${product.image}')" class="w-full bg-gray-900 text-white py-2 hover:bg-gray-800 transition">
+                        Add to Cart
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const filter = this.dataset.filter;
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('filter-active'));
+                this.classList.add('filter-active');
+                renderProducts(filter);
+            });
+        });
+
+        // Add to cart
+        function addToCart(id, name, price, image) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({ id, name, price, image, quantity: 1 });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            alert(`${name} added to cart!`);
+        }
+
+        // Update cart count
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+
+        renderProducts();
+        updateCartCount();
+    </script>
+</body>
+</html>
+

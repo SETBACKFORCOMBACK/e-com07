@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - VDS PRINKZZZ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-bold text-gray-900">VDS PRINKZZZ</a>
+                <ul class="hidden md:flex space-x-8 items-center">
+                    <li><a href="index.html" class="hover:text-gray-600 transition">Home</a></li>
+                    <li><a href="men.html" class="hover:text-gray-600 transition">Men</a></li>
+                    <li><a href="women.html" class="hover:text-gray-600 transition">Women</a></li>
+                    <li><a href="about.html" class="hover:text-gray-600 transition font-semibold">About</a></li>
+                    <li>
+                        <a href="cart.html" class="relative">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                            <span id="cart-count" class="absolute -top-2 -right-2 bg-gray-900 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+                        </a>
+                    </li>
+                </ul>
+                <button class="md:hidden" id="mobile-menu-btn">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <ul class="px-4 py-4 space-y-4">
+                <li><a href="index.html" class="block hover:text-gray-600">Home</a></li>
+                <li><a href="men.html" class="block hover:text-gray-600">Men</a></li>
+                <li><a href="women.html" class="block hover:text-gray-600">Women</a></li>
+                <li><a href="about.html" class="block hover:text-gray-600">About</a></li>
+                <li><a href="cart.html" class="block hover:text-gray-600">Cart</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-6 fade-in">Our Story</h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto fade-in">Where timeless elegance meets modern luxury</p>
+        </div>
+    </section>
+
+    <!-- Brand Story -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="fade-in">
+                    <h2 class="text-3xl font-bold mb-6">The VDS PRINKZZZ Legacy</h2>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        Founded in 2020, VDS PRINKZZZ was born from a vision to create accessible luxury that doesn't compromise on quality or style. We believe that true elegance lies in simplicity and that fashion should empower individuals to express their unique identity.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed">
+                        Our curated collections blend classic sophistication with contemporary designs, ensuring that every piece in your wardrobe is not just clothing, but a statement of your personal style.
+                    </p>
+                </div>
+                <div class="fade-in">
+                    <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=800" alt="Fashion" class="rounded-lg w-full">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Vision -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center fade-in">
+                    <div class="text-4xl font-bold mb-4">🌿</div>
+                    <h3 class="text-xl font-bold mb-3">Sustainability</h3>
+                    <p class="text-gray-600">Committed to ethical fashion and sustainable practices that protect our planet.</p>
+                </div>
+                <div class="text-center fade-in">
+                    <div class="text-4xl font-bold mb-4">✨</div>
+                    <h3 class="text-xl font-bold mb-3">Quality First</h3>
+                    <p class="text-gray-600">Hand-selected materials and meticulous craftsmanship in every garment.</p>
+                </div>
+                <div class="text-center fade-in">
+                    <div class="text-4xl font-bold mb-4">💎</div>
+                    <h3 class="text-xl font-bold mb-3">Style Redefined</h3>
+                    <p class="text-gray-600">Making premium fashion accessible without compromising on exclusivity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center fade-in">
+                <h2 class="text-3xl font-bold mb-6">Get in Touch</h2>
+                <p class="text-gray-600 mb-8">Have a question or feedback? We'd love to hear from you.</p>
+                
+                <div class="bg-gray-50 p-8 rounded-lg">
+                    <form class="space-y-4">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <input type="text" placeholder="Your Name" class="px-4 py-3 border border-gray-300 focus:outline-none focus:border-gray-900">
+                            <input type="email" placeholder="Your Email" class="px-4 py-3 border border-gray-300 focus:outline-none focus:border-gray-900">
+                        </div>
+                        <input type="text" placeholder="Subject" class="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-gray-900">
+                        <textarea placeholder="Your Message" rows="5" class="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-gray-900"></textarea>
+                        <button type="submit" class="bg-gray-900 text-white px-8 py-3 hover:bg-gray-800 transition">Send Message</button>
+                    </form>
+                </div>
+
+                <div class="mt-12">
+                    <h3 class="text-xl font-bold mb-6">Connect With Us</h3>
+                    <div class="flex justify-center space-x-8">
+                        <a href="#" class="text-gray-600 hover:text-gray-900 transition text-2xl">Instagram</a>
+                        <a href="#" class="text-gray-600 hover:text-gray-900 transition text-2xl">Facebook</a>
+                        <a href="#" class="text-gray-600 hover:text-gray-900 transition text-2xl">Twitter</a>
+                        <a href="#" class="text-gray-600 hover:text-gray-900 transition text-2xl">Pinterest</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">LUXE</h3>
+                    <p class="text-gray-400">Timeless fashion for the modern individual</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Shop</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="men.html" class="hover:text-white transition">Men's Collection</a></li>
+                        <li><a href="women.html" class="hover:text-white transition">Women's Collection</a></li>
+                        <li><a href="#" class="hover:text-white transition">Sale</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Customer Care</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="about.html" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="about.html" class="hover:text-white transition">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition">Shipping</a></li>
+                        <li><a href="#" class="hover:text-white transition">Returns</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">Instagram</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">Facebook</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">Twitter</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 VDS PRINKZZZ. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Update cart count
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+
+        updateCartCount();
+    </script>
+</body>
+</html>
+
