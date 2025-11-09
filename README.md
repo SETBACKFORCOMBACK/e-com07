@@ -117,6 +117,32 @@ Potential features to add:
 - Payment integration
 - Order history
 
+## 🔐 Authentication & Orders
+
+This website now includes:
+- **User Authentication**: Login/signup via Supabase
+- **Order Management**: Orders are saved to Supabase database
+- **Secure Checkout**: Login required to place orders
+- **Order History**: View orders in Supabase dashboard
+
+### Setup Instructions
+
+1. **Run Database Setup**:
+   - Go to your Supabase project dashboard
+   - Navigate to SQL Editor
+   - Run the SQL from `database-setup.sql`
+
+2. **Configure Supabase**:
+   - Supabase credentials are already configured in `supabase-config.js`
+   - No additional configuration needed!
+
+3. **Test Authentication**:
+   - Click "Login" in navigation
+   - Create an account or login
+   - Add items to cart and checkout
+
+See `SUPABASE_SETUP.md` for detailed setup instructions.
+
 ## 📄 License
 
 Free to use for personal and commercial projects.

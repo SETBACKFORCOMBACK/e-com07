@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - VDS PRINKZZZ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Playfair Display', serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="text-2xl font-bold text-gray-900">VDS PRINKZZZ</a>
+                <a href="index.html" class="text-gray-600 hover:text-gray-900">← Back to Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Login Section -->
+    <section class="py-20 min-h-screen flex items-center justify-center">
+        <div class="container mx-auto px-4 max-w-md">
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <h1 class="text-3xl font-bold mb-6 text-center">Login</h1>
+                
+                <div id="message" class="mb-4 hidden p-3 rounded"></div>
+                
+                <form id="login-form" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Email</label>
+                        <input type="email" id="email" required 
+                               class="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-gray-900 rounded">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Password</label>
+                        <input type="password" id="password" required 
+                               class="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-gray-900 rounded">
+                    </div>
+                    <button type="submit" 
+                            class="w-full bg-gray-900 text-white py-3 hover:bg-gray-800 transition font-semibold rounded">
+                        Login
+                    </button>
+                </form>
+
+                <div class="mt-6 text-center">
+                    <p class="text-gray-600 text-sm">Don't have an account? 
+                        <a href="#" onclick="toggleSignup()" class="text-gray-900 font-semibold">Sign up</a>
+                    </p>
+                </div>
+
+                <!-- Sign Up Form (Hidden by default) -->
+                <form id="signup-form" class="space-y-4 mt-6 hidden">
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Email</label>
+                        <input type="email" id="signup-email" required 
+                               class="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-gray-900 rounded">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-2">Password</label>
+                        <input type="password" id="signup-password" required minlength="6"
+                               class="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-gray-900 rounded">
+                    </div>
+                    <button type="submit" 
+                            class="w-full bg-gray-900 text-white py-3 hover:bg-gray-800 transition font-semibold rounded">
+                        Sign Up
+                    </button>
+                </form>
+
+                <div class="mt-6 text-center hidden" id="signup-toggle">
+                    <p class="text-gray-600 text-sm">Already have an account? 
+                        <a href="#" onclick="toggleSignup()" class="text-gray-900 font-semibold">Login</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="supabase-config.js"></script>
+    <script>
+        // Toggle between login and signup
+        function toggleSignup() {
+            const loginForm = document.getElementById('login-form');
+            const signupForm = document.getElementById('signup-form');
+            const signupToggle = document.getElementById('signup-toggle');
+            
+            loginForm.classList.toggle('hidden');
+            signupForm.classList.toggle('hidden');
+            signupToggle.classList.toggle('hidden');
+            document.getElementById('message').classList.add('hidden');
+        }
+
+        // Show message
+        function showMessage(text, isError = false) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = text;
+            messageEl.className = `mb-4 p-3 rounded ${isError ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`;
+            messageEl.classList.remove('hidden');
+        }
+
+        // Login form
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const { data, error } = await signIn(email, password);
+            
+            if (error) {
+                showMessage(error.message, true);
+            } else {
+                showMessage('Login successful! Redirecting...', false);
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            }
+        });
+
+        // Signup form
+        document.getElementById('signup-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+
+            const { data, error } = await signUp(email, password);
+            
+            if (error) {
+                showMessage(error.message, true);
+            } else {
+                showMessage('Account created! Please check your email to verify your account.', false);
+            }
+        });
+    </script>
+    <script src="auth.js"></script>
+</body>
+</html>
+

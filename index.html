@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VDS PRINKZZZ - Modern Luxury Boutique</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -41,6 +42,8 @@
                     <li><a href="men.html" class="hover:text-gray-600 transition">Men</a></li>
                     <li><a href="women.html" class="hover:text-gray-600 transition">Women</a></li>
                     <li><a href="about.html" class="hover:text-gray-600 transition">About</a></li>
+                    <li id="login-btn"><a href="login.html" class="hover:text-gray-600 transition">Login</a></li>
+                    <li id="logout-btn" class="hidden"><a href="#" onclick="handleLogout()" class="hover:text-gray-600 transition">Logout</a></li>
                     <li>
                         <a href="cart.html" class="relative">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -63,6 +66,8 @@
                 <li><a href="men.html" class="block hover:text-gray-600">Men</a></li>
                 <li><a href="women.html" class="block hover:text-gray-600">Women</a></li>
                 <li><a href="about.html" class="block hover:text-gray-600">About</a></li>
+                <li id="mobile-login-btn"><a href="login.html" class="block hover:text-gray-600">Login</a></li>
+                <li id="mobile-logout-btn" class="hidden"><a href="#" onclick="handleLogout()" class="block hover:text-gray-600">Logout</a></li>
                 <li><a href="cart.html" class="block hover:text-gray-600">Cart</a></li>
             </ul>
         </div>
@@ -180,6 +185,30 @@
         }
 
         updateCartCount();
+    </script>
+    <script src="supabase-config.js"></script>
+    <script src="auth.js"></script>
+    <script>
+        // Handle logout
+        async function handleLogout() {
+            await signOut();
+            window.location.href = 'index.html';
+        }
+
+        // Update mobile menu auth UI
+        document.addEventListener('DOMContentLoaded', async function() {
+            const user = await getCurrentUser();
+            const mobileLoginBtn = document.getElementById('mobile-login-btn');
+            const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
+            
+            if (user) {
+                if (mobileLoginBtn) mobileLoginBtn.classList.add('hidden');
+                if (mobileLogoutBtn) mobileLogoutBtn.classList.remove('hidden');
+            } else {
+                if (mobileLoginBtn) mobileLoginBtn.classList.remove('hidden');
+                if (mobileLogoutBtn) mobileLogoutBtn.classList.add('hidden');
+            }
+        });
     </script>
     <script src="script.js"></script>
 </body>
